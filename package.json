@@ -1,5 +1,5 @@
 {
-  "name": "create pdf",
+  "name": "create_pdf",
   "version": "1.0.0",
   "description": "convert html page to pdf file",
   "repository": {
