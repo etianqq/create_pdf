@@ -1,0 +1,288 @@
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>htmlToPdf</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+    <!-- build:js scripts/vendor/modernizr.js -->
+    <script src="https://www.google-analytics.com/analytics.js"></script><script src="/bower_components/modernizr/modernizr.js"></script>
+    <!-- endbuild -->
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+<body data-feedly-mini="yes">
+<!--[if lt IE 10]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div class="container" id="print_content">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">htmlToPdf</h3>
+    </div>
+
+    <div>
+        <button onclick="toPDF()">To PDF</button>
+        <h1>Print it</h1>
+
+        <div class="tab_wrap">
+            <table data-grid="" class="sub_table">
+                <thead>
+                <tr class="info_title">
+                    <th style="width:30px;"></th>
+                    <th style="width:40px;">序号</th>
+                    <th style="width:180px;">客户信息</th>
+                    <th style="width:80px;">认筹渠道</th>
+                    <th style="width:100px;text-align: right">认筹金额（元）</th>
+                    <th style="width:100px;text-align: center">认筹日期</th>
+                    <th style="width:50px;">状态</th>
+                    <th style="width:50px;">编辑日志</th>
+                    <th style="width:50px;">交易记录</th>
+                    <th style="width:50px;">置业顾问</th>
+                    <th style="width:120px;"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="info_cont" kk-repeat="Ticket in TicketToBuyList" index="0" style="display: table-row;">
+                    <td class="">
+                        <div class="icheckbox_minimal-orange" style="position: relative;"><input type="checkbox" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot; , &quot;State&quot; : &quot;Ticket.State&quot; , &quot;ExtendState&quot;:&quot;Ticket.ExtendState&quot;,&quot;CustomerInfo&quot;:&quot;Ticket.CustomerName&quot;,&quot;IDCard&quot;:&quot;Ticket:IDCardNo&quot;" name="cb_push" kid="8620" state="退筹" extendstate="" customerinfo="容青" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);">
+                            <ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                        </div>
+                    </td>
+                    <td class="id">
+                        1
+                    </td>
+                    <td>
+                        容青&nbsp;&nbsp;女士&nbsp;&nbsp;15391003930
+                        <label kk-if="Ticket.ExtendState==&quot;退筹中&quot;" style="display: none;"><a href="javascript:;" audittype="退筹" url="Audit_Ticket" class="tag" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8620" state="退筹">
+                            <div class=" color_green border_green">退筹中</div>
+                        </a></label>
+                        <label kk-if="Ticket.ExtendState==&quot;转认购中&quot;" style="display: none;"><a href="javascript:;" audittype="认购" url="Audit_Trans" class="tag" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8620" state="退筹">
+                            <div class=" color_blue  border_blue">认购中</div>
+                        </a></label>
+                        <label kk-if="Ticket.ExtendState==&quot;转成交中&quot;" style="display: none;"><a href="javascript:;" audittype="成交" url="Audit_Trans" class="tag" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8620" state="退筹">
+                            <div class=" color_yellow border_yellow">成交中</div>
+                        </a></label>
+                    </td>
+                    <td>
+                        楼盘渠道
+                    </td>
+                    <td align="right">
+                        <span class="color_orange" kk-bind="Ticket.TicketMoney" kk-replacedom="true">92,197.98</span>
+                    </td>
+                    <td align="center">
+                        2016-03-18
+                    </td>
+                    <td>
+                        <label kk-if="Ticket.State == &quot;认筹&quot;" style="display: none;">
+                            <div class="color_green">已认筹</div>
+                        </label>
+                        <label kk-if="people.State == &quot;退筹&quot;" style="display: inline-block;">
+                            <div class="color_red">已退筹</div>
+                        </label>
+                    </td>
+                    <td><a href="javascript:;" class="changelog" kk-attr="&quot;kid&quot;:&quot;Ticket.Kid&quot;" style="margin-left: 10px;" kid="8620">0</a></td>
+                    <td>
+                        <a href="javascript:;" class="CaseFollows" style="margin-left: 10px;" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot; " kid="8620">4</a>
+                    </td>
+                    <td>
+                        OO-置业
+                    </td>
+
+                    <td>
+                        <div class="reset" style="display: none;">
+                            <a class="btn_set" data-toggle="modal" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8620" state="退筹">查看详情</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="info_cont" kk-repeat="Ticket in TicketToBuyList" index="1" style="display: table-row;">
+                    <td>
+                        <div class="icheckbox_minimal-orange" style="position: relative;"><input type="checkbox" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot; , &quot;State&quot; : &quot;Ticket.State&quot; , &quot;ExtendState&quot;:&quot;Ticket.ExtendState&quot;,&quot;CustomerInfo&quot;:&quot;Ticket.CustomerName&quot;,&quot;IDCard&quot;:&quot;Ticket:IDCardNo&quot;" name="cb_push" kid="8619" state="退筹" extendstate="" customerinfo="成莺" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);">
+                            <ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                        </div>
+                    </td>
+                    <td class="id">
+                        2
+                    </td>
+                    <td>
+                        成莺&nbsp;&nbsp;先生&nbsp;&nbsp;15735713527
+                        <label kk-if="Ticket.ExtendState==&quot;退筹中&quot;" style="display: none;"><a href="javascript:;" audittype="退筹" url="Audit_Ticket" class="tag" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8619" state="退筹">
+                            <div class=" color_green border_green">退筹中</div>
+                        </a></label>
+                        <label kk-if="Ticket.ExtendState==&quot;转认购中&quot;" style="display: none;"><a href="javascript:;" audittype="认购" url="Audit_Trans" class="tag" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8619" state="退筹">
+                            <div class=" color_blue  border_blue">认购中</div>
+                        </a></label>
+                        <label kk-if="Ticket.ExtendState==&quot;转成交中&quot;" style="display: none;"><a href="javascript:;" audittype="成交" url="Audit_Trans" class="tag" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8619" state="退筹">
+                            <div class=" color_yellow border_yellow">成交中</div>
+                        </a></label>
+                    </td>
+                    <td>
+                        楼盘渠道
+                    </td>
+                    <td align="right">
+                        <span class="color_orange" kk-bind="Ticket.TicketMoney" kk-replacedom="true">8,276.98</span>
+                    </td>
+                    <td align="center">
+                        2016-03-18
+                    </td>
+                    <td>
+                        <label kk-if="Ticket.State == &quot;认筹&quot;" style="display: none;">
+                            <div class="color_green">已认筹</div>
+                        </label>
+                        <label kk-if="people.State == &quot;退筹&quot;" style="display: inline-block;">
+                            <div class="color_red">已退筹</div>
+                        </label>
+                    </td>
+                    <td><a href="javascript:;" class="changelog" kk-attr="&quot;kid&quot;:&quot;Ticket.Kid&quot;" style="margin-left: 10px;" kid="8619">0</a></td>
+                    <td>
+                        <a href="javascript:;" class="CaseFollows" style="margin-left: 10px;" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot; " kid="8619">4</a>
+                    </td>
+                    <td>
+                        OO-置业
+                    </td>
+
+                    <td>
+                        <div class="reset">
+                            <a class="btn_set" data-toggle="modal" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8619" state="退筹">查看详情</a>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="info_cont" kk-repeat="Ticket in TicketToBuyList" index="2" style="display: table-row;">
+                    <td>
+                        <div class="icheckbox_minimal-orange" style="position: relative;"><input type="checkbox" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot; , &quot;State&quot; : &quot;Ticket.State&quot; , &quot;ExtendState&quot;:&quot;Ticket.ExtendState&quot;,&quot;CustomerInfo&quot;:&quot;Ticket.CustomerName&quot;,&quot;IDCard&quot;:&quot;Ticket:IDCardNo&quot;" name="cb_push" kid="8618" state="退筹" extendstate="" customerinfo="富荔" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);">
+                            <ins class="iCheck-helper" style="position: absolute; top: -20%; left: -20%; display: block; width: 140%; height: 140%; margin: 0px; padding: 0px; border: 0px; opacity: 0; background: rgb(255, 255, 255);"></ins>
+                        </div>
+                    </td>
+                    <td class="id">
+                        3
+                    </td>
+                    <td>
+                        富荔&nbsp;&nbsp;女士&nbsp;&nbsp;15619207166
+                        <label kk-if="Ticket.ExtendState==&quot;退筹中&quot;" style="display: none;"><a href="javascript:;" audittype="退筹" url="Audit_Ticket" class="tag" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8618" state="退筹">
+                            <div class=" color_green border_green">退筹中</div>
+                        </a></label>
+                        <label kk-if="Ticket.ExtendState==&quot;转认购中&quot;" style="display: none;"><a href="javascript:;" audittype="认购" url="Audit_Trans" class="tag" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8618" state="退筹">
+                            <div class=" color_blue  border_blue">认购中</div>
+                        </a></label>
+                        <label kk-if="Ticket.ExtendState==&quot;转成交中&quot;" style="display: none;"><a href="javascript:;" audittype="成交" url="Audit_Trans" class="tag" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8618" state="退筹">
+                            <div class=" color_yellow border_yellow">成交中</div>
+                        </a></label>
+                    </td>
+                    <td>
+                        楼盘渠道
+                    </td>
+                    <td align="right">
+                        <span class="color_orange" kk-bind="Ticket.TicketMoney" kk-replacedom="true">86,104.70</span>
+                    </td>
+                    <td align="center">
+                        2016-03-18
+                    </td>
+                    <td>
+                        <label kk-if="Ticket.State == &quot;认筹&quot;" style="display: none;">
+                            <div class="color_green">已认筹</div>
+                        </label>
+                        <label kk-if="people.State == &quot;退筹&quot;" style="display: inline-block;">
+                            <div class="color_red">已退筹</div>
+                        </label>
+                    </td>
+                    <td><a href="javascript:;" class="changelog" kk-attr="&quot;kid&quot;:&quot;Ticket.Kid&quot;" style="margin-left: 10px;" kid="8618">0</a></td>
+                    <td>
+                        <a href="javascript:;" class="CaseFollows" style="margin-left: 10px;" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot; " kid="8618">4</a>
+                    </td>
+                    <td>
+                        OO-置业
+                    </td>
+
+                    <td>
+                        <div class="reset">
+                            <a class="btn_set" data-toggle="modal" kk-attr=" &quot;Kid&quot; : &quot;Ticket.Kid&quot;,&quot;State&quot;:&quot;Ticket.State&quot; " kid="8618" state="退筹">查看详情</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="footer">
+        <p>♥ from the Yeoman team</p>
+    </div>
+</div>
+
+<!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+<script>
+    (function (b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+                function () {
+                    (b[l].q = b[l].q || []).push(arguments)
+                });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = 'https://www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r)
+    }(window, document, 'script', 'ga'));
+    ga('create', 'UA-XXXXX-X');
+    ga('send', 'pageview');
+</script>
+
+<!-- build:js scripts/vendor.js -->
+<!-- bower:js -->
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js scripts/plugins.js -->
+<script src="scripts/jquery-1.7.1.min.js"></script>
+
+<!-- endbuild -->
+
+<!-- build:js scripts/main.js -->
+<script src="scripts/main.js"></script>
+
+<script>
+    function toPDF() {
+        var content = $("html").html();
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify({content: content}),
+            contentType: 'application/json',
+            url: 'http://localhost:9001/createPdf',
+            success: function(data) {
+                console.log('success');
+                console.log(JSON.stringify(data));
+            }
+        });
+    }
+</script>
+<!-- endbuild -->
+
+
+<div id="feedly-mini" title="feedly Mini tookit"></div></body>
