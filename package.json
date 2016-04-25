@@ -1,35 +1,14 @@
 {
-  "name": "oclazyload",
-  "version": "1.0.9",
-  "description": "Load modules on demand (lazy load) with angularJS",
-  "main": "dist/ocLazyLoad.js",
-  "author": "Olivier Combe <olivier.combe@gmail.com>",
-  "license": "MIT",
-  "homepage": "https://github.com/ocombe/ocLazyLoad",
-  "directories": {
-    "example": "examples"
-  },
-  "scripts": {
-    "bower": "bower install",
-    "test": "karma start karma.conf.js",
-    "test-dev": "karma start karma.conf.js --single-run=false",
-    "build": "gulp build-minify"
-  },
+  "name": "create pdf",
+  "version": "1.0.0",
+  "description": "convert html page to pdf file",
   "repository": {
     "type": "git",
     "url": "git://github.com/ocombe/ocLazyLoad.git"
   },
   "keywords": [
-    "lazy load",
-    "lazy-load",
-    "load on demand",
-    "module",
-    "angular",
-    "angularJS"
+    "pdf creator"
   ],
-  "bugs": {
-    "url": "https://github.com/ocombe/ocLazyLoad/issues"
-  },
   "devDependencies": {
     "body-parser": "1.14.2",
     "create-file": "^1.0.1",
