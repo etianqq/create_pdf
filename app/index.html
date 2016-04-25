@@ -1,0 +1,125 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>htmlToPdf</title>
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+
+</head>
+<body>
+<!--[if lt IE 10]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<div class="container" id="print_content">
+    <div class="header">
+        <ul class="nav nav-pills pull-right">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <h3 class="text-muted">htmlToPdf</h3>
+    </div>
+
+    <div>
+        <button onclick="toPDF()">To PDF</button>
+        <h1>Print it</h1>
+
+        <div class="tab_wrap">
+            <table data-grid="" class="sub_table">
+                <thead>
+                <tr class="info_title">
+                    <th style="width:30px;"></th>
+                    <th style="width:40px;">序号</th>
+                    <th style="width:180px;">客户信息</th>
+                    <th style="width:80px;">认筹渠道</th>
+                    <th style="width:100px;text-align: right">认筹金额（元）</th>
+                    <th style="width:100px;text-align: center">认筹日期</th>
+                    <th style="width:50px;">状态</th>
+                    <th style="width:50px;">编辑日志</th>
+                    <th style="width:50px;">交易记录</th>
+                    <th style="width:50px;">置业顾问</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>容青  女士  15391003930</td>
+                    <td>楼盘渠道</td>
+                    <td>92,197.98</td>
+                    <td>2016-03-18</td>
+                    <td>已退筹</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>OO-置业</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>成莺  女士  15391003930</td>
+                    <td>楼盘渠道</td>
+                    <td>8,276.98</td>
+                    <td>2016-03-18</td>
+                    <td>已退筹</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>OO-置业</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>富荔  女士  15391003930</td>
+                    <td>楼盘渠道</td>
+                    <td>86,104.70</td>
+                    <td>2016-03-18</td>
+                    <td>已退筹</td>
+                    <td>0</td>
+                    <td>4</td>
+                    <td>OO-置业</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- build:js scripts/plugins.js -->
+<script src="scripts/jquery-1.7.1.min.js"></script>
+
+<script>
+    function toPDF() {
+        var content = $("html").html();
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify({content: content}),
+            contentType: 'application/json',
+            url: 'http://localhost:9001/createPdf',
+            success: function (data) {
+                downloadURI(data, "data.pdf");
+                console.log(data);
+            }
+        });
+
+        function downloadURI(uri, name) {
+            var link = document.createElement("a");
+            link.download = name;
+            link.href = uri;
+            link.click();
+        }
+    }
+</script>
+<!-- endbuild -->
+</body>
+</html>
