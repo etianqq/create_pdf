@@ -1,6 +1,12 @@
 @media print {
-  table {
-    border: 1px solid #ccc;
-    padding: 10px;
+
+  @page {
+    margin: 2cm;
+    orphans: 5;
+    widows: 5;
+  }
+
+  .do_not_print {
+    display: none;
   }
 }

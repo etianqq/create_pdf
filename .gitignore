@@ -1,5 +1,5 @@
 node_modules
 dist
-app/pdf
+app/pdf/
 .idea
 dis/

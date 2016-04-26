@@ -7,12 +7,16 @@
     <title>htmlToPdf</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/main.css" media="print">
     <style>
         @media print {
-            table {
-                border: 1px solid #ccc;
-                padding: 10px;
+            @page {
+                margin: 2cm;
+                orphans: 5;
+                widows: 5;
+            }
+            .do_not_print {
+                display: none;
             }
         }
     </style>
@@ -24,7 +28,7 @@
 <![endif]-->
 
 <div class="container" id="print_content">
-    <div class="header">
+    <div class="header do_not_print">
         <h3 class="text-muted">htmlToPdf</h3>
         <button onclick="toPDF1()">To PDF</button>
         <button onclick="toPDF2()">To PDF by Jsonp</button>
