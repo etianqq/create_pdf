@@ -1,5 +1,5 @@
 {
-  "name": "create pdf",
+  "name": "create_pdf",
   "version": "1.0.0",
   "description": "convert html page to pdf file",
   "repository": {
@@ -15,6 +15,7 @@
     "express": "4.8.1",
     "express-session": "1.7.6",
     "fs": "0.0.2",
+    "html-pdf": "^2.0.1",
     "shelljs": "^0.6.0"
   }
 }
