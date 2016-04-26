@@ -7,17 +7,15 @@
     <title>htmlToPdf</title>
 
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!-- Place favicon.ico in the root directory -->
-
-    <!-- build:css styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
-    <!-- endbuild -->
-
+    <style>
+        @media print {
+            table {
+                border: 1px solid #ccc;
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
 <!--[if lt IE 10]>
@@ -30,10 +28,12 @@
         <h3 class="text-muted">htmlToPdf</h3>
         <button onclick="toPDF1()">To PDF</button>
         <button onclick="toPDF2()">To PDF by Jsonp</button>
+        <button onclick="toPDF3()">To PDF by binbin</button>
     </div>
 
     <div>
         <h1>Print it</h1>
+
         <div class="tab_wrap">
             <table data-grid="" class="sub_table">
                 <thead>
@@ -53,7 +53,7 @@
                 <tbody>
                 <tr>
                     <td>1</td>
-                    <td>容青  女士  15391003930</td>
+                    <td>容青 女士 15391003930</td>
                     <td>楼盘渠道</td>
                     <td>92,197.98</td>
                     <td>2016-03-18</td>
@@ -64,7 +64,7 @@
                 </tr>
                 <tr>
                     <td>2</td>
-                    <td>成莺  女士  15391003930</td>
+                    <td>成莺 女士 15391003930</td>
                     <td>楼盘渠道</td>
                     <td>8,276.98</td>
                     <td>2016-03-18</td>
@@ -75,7 +75,7 @@
                 </tr>
                 <tr>
                     <td>3</td>
-                    <td>富荔  女士  15391003930</td>
+                    <td>富荔 女士 15391003930</td>
                     <td>楼盘渠道</td>
                     <td>86,104.70</td>
                     <td>2016-03-18</td>
@@ -101,6 +101,7 @@
             data: JSON.stringify({content: content}),
             contentType: 'application/json',
             url: '/createPdf',
+            crossDomain: true,
             success: function (data) {
                 downloadURI(data, "data.pdf");
             }
@@ -115,7 +116,21 @@
             url: '/createPdf',
             contentType: 'application/json',
             dataType: "jsonp",
-            jsonp:"callback",
+            jsonp: "callback",
+            success: function (data) {
+                downloadURI(data, "data.pdf");
+            }
+        });
+    }
+
+    function toPDF3() {
+        var content = $("html").html();
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify({content: content}),
+            contentType: 'application/json',
+            url: 'http://120.24.49.129:9001/createPdf',
+            crossDomain: true,
             success: function (data) {
                 downloadURI(data, "data.pdf");
             }
