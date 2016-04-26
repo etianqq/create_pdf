@@ -45,7 +45,6 @@ function createPdf(filepath, filename, req, res) {
             return console.log(err);
         }
         var obj = "/pdf/" + filename + ".pdf";
-        response.send(obj);
         //if dataType is "jsonp" and callback name is "callback"
         if (request.query.callback) {
             response.jsonp(obj);
