@@ -3,6 +3,7 @@
  */
 //use express
 var express = require('express'),
+    cors = require('cors'),
     app = express(),
     path = require('path'),
     bodyParser = require('body-parser');
@@ -15,17 +16,15 @@ var createFile = require('create-file');
 //serve static index.html as default
 app.use(express.static(__dirname + '/app/'));
 app.use(bodyParser.json());
-
+app.use(cors());
 //bind and listen for connections on the given host and port
 app.listen(9001, function () {
     console.log('Server listening on', 9001)
 });
 
 /*--------------------- REST API ---------------------*/
+app.options('/createPdf', cors());
 app.post('/createPdf', function (req, res) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,POST');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
     var date = +new Date();
     var filepath = 'dis/pdf_' + date + '.html';
     var filename = 'pdf_' + date;
@@ -50,9 +49,7 @@ function createPdf(filepath, filename, req, res) {
             response.jsonp(obj);
         }
         else {
-            response.send(obj);
+            response.json(obj);
         }
     });
 }
-
-
