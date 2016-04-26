@@ -27,18 +27,13 @@
 
 <div class="container" id="print_content">
     <div class="header">
-        <ul class="nav nav-pills pull-right">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
         <h3 class="text-muted">htmlToPdf</h3>
+        <button onclick="toPDF1()">To PDF</button>
+        <button onclick="toPDF2()">To PDF by Jsonp</button>
     </div>
 
     <div>
-        <button onclick="toPDF()">To PDF</button>
         <h1>Print it</h1>
-
         <div class="tab_wrap">
             <table data-grid="" class="sub_table">
                 <thead>
@@ -99,25 +94,39 @@
 <script src="scripts/jquery-1.7.1.min.js"></script>
 
 <script>
-    function toPDF() {
+    function toPDF1() {
         var content = $("html").html();
         $.ajax({
             type: 'POST',
             data: JSON.stringify({content: content}),
             contentType: 'application/json',
-            url: 'http://localhost:9001/createPdf',
+            url: '/createPdf',
             success: function (data) {
                 downloadURI(data, "data.pdf");
-                console.log(data);
             }
         });
+    }
 
-        function downloadURI(uri, name) {
-            var link = document.createElement("a");
-            link.download = name;
-            link.href = uri;
-            link.click();
-        }
+    function toPDF2() {
+        var content = $("html").html();
+        $.ajax({
+            type: 'POST',
+            data: JSON.stringify({content: content}),
+            url: '/createPdf',
+            contentType: 'application/json',
+            dataType: "jsonp",
+            jsonp:"callback",
+            success: function (data) {
+                downloadURI(data, "data.pdf");
+            }
+        });
+    }
+
+    function downloadURI(uri, name) {
+        var link = document.createElement("a");
+        link.download = name;
+        link.href = uri;
+        link.click();
     }
 </script>
 <!-- endbuild -->

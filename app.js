@@ -23,28 +23,33 @@ app.listen(9001, function () {
 
 /*--------------------- REST API ---------------------*/
 app.post('/createPdf', function (req, res) {
-    //console.log(req.body.content);
     var date = +new Date();
     var filepath = 'dis/pdf_' + date + '.html';
     var filename = 'pdf_' + date;
-    var path = 'dis/';
-
     createFile(filepath, req.body.content, function (err) {
-        createPdf1(filepath, filename, res);
-        //res.send("success");
+        createPdf(filepath, filename, req, res);
     });
 });
 
-function createPdf1(filepath, filename, res) {
+function createPdf(filepath, filename, req, res) {
     var response = res;
+    var request = req;
     var html = fs.readFileSync(filepath, 'utf8');
     var options = {format: 'Letter'};
 
     pdf.create(html, options).toFile('./app/pdf/' + filename + '.pdf', function (err, res) {
-        if (err) return console.log(err);
-        response.send("/pdf/" + filename + ".pdf");
+        if (err){
+            return console.log(err);
+        }
+        var obj = "/pdf/" + filename + ".pdf";
+        // if dataType is "jsonp" and callback name is "callback"
+        if (request.query.callback){
+            response.jsonp(obj);
+        }
+        else {
+            response.send(obj);
+        }
     });
-    //shell.exec('html-pdf '+filename+' dis/demo.pdf');
 }
 
 
