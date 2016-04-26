@@ -23,6 +23,9 @@ app.listen(9001, function () {
 
 /*--------------------- REST API ---------------------*/
 app.post('/createPdf', function (req, res) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,POST');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
     var date = +new Date();
     var filepath = 'dis/pdf_' + date + '.html';
     var filename = 'pdf_' + date;
@@ -38,12 +41,13 @@ function createPdf(filepath, filename, req, res) {
     var options = {format: 'Letter'};
 
     pdf.create(html, options).toFile('./app/pdf/' + filename + '.pdf', function (err, res) {
-        if (err){
+        if (err) {
             return console.log(err);
         }
         var obj = "/pdf/" + filename + ".pdf";
-        // if dataType is "jsonp" and callback name is "callback"
-        if (request.query.callback){
+        response.send(obj);
+        //if dataType is "jsonp" and callback name is "callback"
+        if (request.query.callback) {
             response.jsonp(obj);
         }
         else {
