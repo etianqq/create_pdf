@@ -127,20 +127,6 @@
         });
     }
 
-    function toPDF3() {
-        var content = $("html").html();
-        $.ajax({
-            type: 'POST',
-            data: JSON.stringify({content: content}),
-            contentType: 'application/json',
-            url: 'http://120.24.49.129:9001/createPdf',
-            crossDomain: true,
-            success: function (data) {
-                downloadURI(data, "data.pdf");
-            }
-        });
-    }
-
     function downloadURI(uri, name) {
         var link = document.createElement("a");
         link.download = name;
